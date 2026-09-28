@@ -1,0 +1,47 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# capacitor-assets PWA dump (canonical copies live in android/ and ios/)
+/icons
+coverage
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Native signing / local SDK
+*.keystore
+*.jks
+*.mobileprovision
+*.p12
+*.p8
+AuthKey_*.p8
+android/local.properties
+android/keystore.properties
+UPLOAD_KEYSTORE.md
+android/UPLOAD_KEYSTORE.md
+ios/App/Pods
+ios/App/App/public
+android/.gradle
+android/build
+android/app/build
+android/app/.cxx
+android/captures

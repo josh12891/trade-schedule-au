@@ -1,0 +1,29 @@
+{
+  "appId": "com.josh12891.tradeschedule",
+  "appName": "Trade Schedule",
+  "webDir": "dist",
+  "backgroundColor": "#ebe6dc",
+  "android": {
+    "backgroundColor": "#ebe6dc"
+  },
+  "ios": {
+    "backgroundColor": "#ebe6dc",
+    "contentInset": "automatic",
+    "preferredContentMode": "mobile"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1200,
+      "launchAutoHide": true,
+      "backgroundColor": "#0B1F33",
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": false,
+      "splashFullScreen": true,
+      "splashImmersive": true
+    },
+    "StatusBar": {
+      "style": "LIGHT",
+      "backgroundColor": "#0B1F33"
+    }
+  }
+}
