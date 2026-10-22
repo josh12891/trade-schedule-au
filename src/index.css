@@ -1,0 +1,148 @@
+@import "@fontsource/outfit/400.css";
+@import "@fontsource/outfit/500.css";
+@import "@fontsource/outfit/600.css";
+@import "@fontsource/barlow-condensed/600.css";
+@import "@fontsource/barlow-condensed/700.css";
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Nimbus Sans Narrow", sans-serif;
+
+  --color-canvas: #ebe6dc;
+  --color-paper: #f7f4ee;
+  --color-paper-2: #fffdf8;
+  /* Header and chrome use the Australian Dynamics navy / orange pair.
+     Task bars keep the trade palette in schedule.ts. */
+  --color-ink: #0b1f33;
+  --color-muted: #5c6570;
+  --color-line: #ddd4c8;
+  --color-hi: #f5a623;
+  --color-hi-deep: #9a3412;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    margin: 0;
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .hazard-strip {
+    height: 0.375rem;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--color-hi) 0 8px,
+      var(--color-ink) 8px 16px
+    );
+  }
+
+  .col-weekend {
+    background-color: color-mix(in srgb, var(--color-ink) 4%, var(--color-paper));
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0 6px,
+      color-mix(in srgb, var(--color-ink) 28%, transparent) 6px 7px
+    );
+  }
+
+  .col-today {
+    background-color: color-mix(in srgb, var(--color-hi) 18%, var(--color-paper));
+  }
+
+  .day-wash {
+    background-image:
+      linear-gradient(
+        to right,
+        transparent calc(var(--day) - 1px),
+        var(--color-line) calc(var(--day) - 1px)
+      ),
+      linear-gradient(
+        to right,
+        transparent 0 calc(5 * var(--day)),
+        color-mix(in srgb, var(--color-ink) 6%, var(--color-paper)) calc(5 * var(--day))
+          calc(7 * var(--day))
+      );
+    background-size: var(--day) 100%, calc(7 * var(--day)) 100%;
+    background-repeat: repeat;
+    background-position: 0 0, var(--week-shift) 0;
+  }
+
+  .day-wash::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0 6px,
+      color-mix(in srgb, var(--color-ink) 28%, transparent) 6px 7px
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0 calc(5 * var(--day)),
+      #000 calc(5 * var(--day)) calc(7 * var(--day))
+    );
+    mask-size: calc(7 * var(--day)) 100%;
+    mask-position: var(--week-shift) 0;
+    mask-repeat: repeat;
+  }
+
+  .board-scroll {
+    touch-action: pan-x pan-y;
+    overscroll-behavior: contain;
+    cursor: grab;
+  }
+
+  .board-scroll.is-panning {
+    cursor: grabbing;
+    user-select: none;
+  }
+
+  .now-dot {
+    animation: now-pulse 2.2s ease-in-out infinite;
+  }
+}
+
+@keyframes now-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.45);
+    opacity: 0.65;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .now-dot {
+    animation: none;
+  }
+}
